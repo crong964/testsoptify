@@ -104,6 +104,7 @@ export default function Header() {
                 </g>
               </svg>
             </div>
+
             <div className="bg-[#2A2A2A] p-2 rounded-full relative cursor-pointer">
               <svg
                 onClick={() => {
@@ -160,6 +161,14 @@ export default function Header() {
                     className="text-white cursor-pointer hover:bg-black"
                   >
                     <div className="p-2">Đăng xuất </div>
+                  </div>
+                  <div
+                    onClick={() => {
+                      window.location.replace("/dashboard");
+                    }}
+                    className="text-white cursor-pointer hover:bg-black"
+                  >
+                    <div className="p-2">Quản lý bài hát</div>
                   </div>
                 </div>
               ) : (

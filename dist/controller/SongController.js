@@ -42,6 +42,8 @@ const path_1 = __importStar(require("path"));
 const uuid_1 = require("uuid");
 const UserService_1 = __importDefault(require("../services/UserService"));
 const fs_1 = require("fs");
+const LikedSongService_1 = __importDefault(require("../services/LikedSongService"));
+const LikedSongModel_1 = __importDefault(require("../model/LikedSongModel"));
 class SongController {
     Update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -182,12 +184,17 @@ class SongController {
         return __awaiter(this, void 0, void 0, function* () {
             var idsong = req.body.idsong;
             var song = yield SongController.song.Get(idsong);
+            var d = new LikedSongModel_1.default();
+            d.id_user_liked = req.cookies.id || "";
+            d.Id = idsong;
+            var lsong = yield SongController.likesong.Get(d);
             if (song == undefined) {
                 res.json({
                     err: true,
                 });
                 return;
             }
+            song.like = lsong != undefined;
             res.json({
                 err: false,
                 song: song
@@ -341,5 +348,6 @@ class SongController {
 }
 SongController.song = SongService_1.default;
 SongController.user = UserService_1.default;
+SongController.likesong = LikedSongService_1.default;
 var songController = new SongController();
 exports.default = songController;

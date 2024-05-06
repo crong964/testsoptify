@@ -36,8 +36,8 @@ export function Duration(d: Duration) {
   var minutes = Math.floor(da / 60);
   var second = da % 60;
   return (
-    <>
+    <div className="px-2">
       {minutes}:{second}
-    </>
+    </div>
   );
 }

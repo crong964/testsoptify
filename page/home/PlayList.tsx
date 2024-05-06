@@ -7,7 +7,7 @@ import { Duration, get, post } from "../config/req";
 import { SongInPlayList } from "./Song";
 import TypeFriend from "./friend/TypeFriend";
 
-var g = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 6, 7];
+
 interface artise {
   id: string;
   Vertify: string;

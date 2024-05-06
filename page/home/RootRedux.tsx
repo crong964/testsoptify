@@ -81,8 +81,6 @@ var rootslice = createSlice({
       state.command.page = action.payload.page;
       state.command.param = action.payload.param;
 
-      console.log(state.position);
-
       if (state.stack[state.position + 1]) {
         state.stack[state.position + 1] = action.payload;
         state.position = state.position + 1;

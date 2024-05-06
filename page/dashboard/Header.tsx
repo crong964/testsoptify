@@ -18,10 +18,10 @@ export default function Header() {
   const image = useSelector((state: RootNaviRedux) => state.navi.image);
   return (
     <div className="bg-black flex items-center text-white font-bold text-[14px] p-5">
-      <div className="flex justify-start w-1/3 cursor-pointer ">
-        <img src={image} className="size-9" alt="" />
-      </div>
-      <div className="flex justify-center space-x-4 w-1/3 cursor-pointer ">
+      <div className="flex justify-start w-full space-x-4 cursor-pointer ">
+        <img onClick={()=>{
+          window.location.href="/dashboard"
+        }} src={image} className="size-9 rounded-lg" alt="" />
         <Text>
           <div
             className={`${page == "home" ? "text-white" : ""}`}
@@ -34,7 +34,7 @@ export default function Header() {
         </Text>
         <Text>
           <div
-            className={`${page == "SongForm" ? "text-white" : ""}`}
+            className={`${page == "songlist" ? "text-white" : ""}`}
             onClick={() => {
               dispatch(Navi("songlist"));
             }}
@@ -42,11 +42,9 @@ export default function Header() {
             Bài hát
           </div>
         </Text>
-      </div>
-      <div className="flex justify-end space-x-4 w-1/3 cursor-pointer ">
         <Text>
           <div
-            className={`${page == "SongForm" ? "text-white" : ""}`}
+            className={`${page == "songform" ? "text-white" : ""}`}
             onClick={() => {
               dispatch(Navi("songform"));
             }}
@@ -54,10 +52,9 @@ export default function Header() {
             Thêm bài mới
           </div>
         </Text>
-        <Text>
-          <div>Cài đặt</div>
-        </Text>
+        
       </div>
+      
     </div>
   );
 }

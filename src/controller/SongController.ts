@@ -7,11 +7,14 @@ import { v4 as uuidv4 } from 'uuid';
 import userService, { UserService } from "../services/UserService";
 import { createWriteStream } from "fs";
 import { limit } from "../config/Helper";
+import likedSongService, { LikedSongService } from "../services/LikedSongService";
+import LikedSongModel from "../model/LikedSongModel";
 
 
 class SongController {
     static song: SongService = songService
     static user: UserService = userService
+    static likesong: LikedSongService = likedSongService
     async Update(req: Request, res: Response) {
         var id = req.cookies.id
         var u = await SongController.user.Get(id)
@@ -144,13 +147,20 @@ class SongController {
     }
     async GetSong(req: Request, res: Response) {
         var idsong = req.body.idsong
-        var song = await SongController.song.Get(idsong)
+        var song = await SongController.song.Get(idsong) as any
+        var d = new LikedSongModel()
+        d.id_user_liked = req.cookies.id || ""
+        d.Id = idsong
+        var lsong = await SongController.likesong.Get(d)
+
+
         if (song == undefined) {
             res.json({
                 err: true,
             })
             return
         }
+        song.like = lsong != undefined
         res.json({
             err: false,
             song: song
